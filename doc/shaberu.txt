@@ -1,0 +1,97 @@
+shaberu.txt*	Speech synthesis wrapper for vim
+
+Version: 0.0.1
+Author: supermomonga (@supermomonga)
+License: NYSL
+
+==============================================================================
+CONTENTS					*shaberu-contents*
+
+INTRODUCTION			|shaberu-introduction|
+INTERFACE			|shaberu-interface|
+  COMMANDS			  |shaberu-commands|
+  FUNCTIONS			  |shaberu-functions|
+SETTINGS			|shaberu-settings|
+CHANGELOG			|shaberu-changelog|
+
+
+==============================================================================
+INTRODUCTION					*shaberu-introduction*
+
+*shaberu* is Vim plugin to make Vim speak easily. 
+
+It Depends on thoese following plugins.
+- vimproc
+
+
+Latest Version:
+http://github.com/supermomonga/shaberu.vim
+
+
+						*shaberu-synopsis*
+>
+	" Speak a given text.
+	:ShaberuSay your text
+
+	" (In .vimrc) Set default program to execute.
+        let g:shaberu_user_define_say_command = 'say-openjtalk '
+<
+
+
+==============================================================================
+INTERFACE					*shaberu-interface*
+
+------------------------------------------------------------------------------
+COMMANDS					*shaberu-commands*
+
+						*:shaberu*
+:ShaberuSay {text} 
+	Execute program with misc. options.
+	See |shaberu-options| for supported options.
+	Options are pairs of names, values like:
+
+:ShaberuMuteOn
+        Switch shaberu's mute status to ON.
+        When this status is ON, shaberu doesn't speak anything.
+        If |g:shaberu_echo_when_mute| is 1, shaberu show show the text in echo
+        area.
+
+------------------------------------------------------------------------------
+FUNCTIONS					*shaberu-functions*
+
+shaberu#command()		   	        *shaberu#command()*
+	Return the command when Vim execute speech command.
+        If |g:shaberu_user_define_say_command| is defined, it return this.
+        If that isn't defined, it return shaberu's default command.
+        The default command is available in only Max OS X.
+
+shaberu#say({text})			        *shaberu#say()*
+	Speak a given text.
+
+shaberu#order({text}, {order})			*shaberu#order()*
+	Execute {order} as command and speak {text}.
+
+shaberu#mute({status})			        *shaberu#mute()*
+        Set |g:shaberu_is_mute| to {status}.
+
+						*shaberu#mute_toggle()*
+shaberu#mute_toggle()
+        Toggle |g:shaberu_is_mute|.
+
+==============================================================================
+SETTINGS					*shaberu-settings*
+
+User define speech command		*g:shaberu_user_define_say_command*
+        If |g:shaberu_user_define_say_command| is defined, it used when
+        shaberu speak a text.
+        If this isn't, shaberu uses shaberu's default command to speak.
+        The default command is available in only Max OS X.
+        So if you use Windows or Linux OS, you need to define this.
+
+==============================================================================
+CHANGELOG					*shaberu-changelog*
+
+See git-log.
+
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
