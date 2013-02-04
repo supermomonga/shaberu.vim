@@ -3,10 +3,10 @@
 " Author : supermomonga (@supermomonga)
 " License: NYSL
 
-if exists('g:loaded_ref')
+if exists('g:loaded_shaberu')
   finish
 endif
-let g:loaded_ref = 1
+let g:loaded_shaberu = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
