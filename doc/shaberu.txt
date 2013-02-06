@@ -34,7 +34,7 @@ http://github.com/supermomonga/shaberu.vim
 	:ShaberuSay your text
 
 	" (In .vimrc) Set default program to execute.
-        let g:shaberu_user_define_say_command = 'say-openjtalk '
+        let g:shaberu_user_define_say_command = 'say -v Kyoko "%%TEXT%%"'
 <
 
 
@@ -85,8 +85,15 @@ User define speech command		*g:shaberu_user_define_say_command*
         If |g:shaberu_user_define_say_command| is defined, it used when
         shaberu speak a text.
         If this isn't, shaberu uses shaberu's default command to speak.
-        The default command is available in only Max OS X.
-        So if you use Windows or Linux OS, you need to define this.
+        The default command is available in only Max OS X and Windows.
+        So if you use other OS, you need to define this.
+        Don't forget to contain '%%TEXT%%' to this variable. It will be
+        replaced with speaking text.
+
+>
+	" (In .vimrc) Set default program to execute.
+        let g:shaberu_user_define_say_command = 'say -v Kyoko "%%TEXT%%"'
+<
 
 ==============================================================================
 CHANGELOG					*shaberu-changelog*

@@ -36,10 +36,10 @@ function! shaberu#command()
     let l:os = shaberu#os()
     if l:os == 'win'
       " TODO: sapi.dllのライセンスがよくわからないのでvbsでごまかしてる
-      return 'cscript ' . g:shaberu_path_sapi . ' '
+      return 'cscript ' . g:shaberu_path_sapi . ' "%%TEXT%%"'
     elseif l:os == 'mac'
       " TODO: sayは標準コマンドだけど日本語ボイスが標準かどうか微妙
-      return 'say '
+      return 'say "%%TEXT%%"'
     elseif l:os == 'unix'
       " TODO: unixに標準ライブラリあるのかな…
     elseif l:os == 'linux'
@@ -57,7 +57,7 @@ function! shaberu#say(text)
     if g:shaberu_is_mute && g:shaberu_echo_when_mute
       echo 'Mute : ' . a:text 
     else
-      call vimproc#system_bg(l:command . a:text)
+      call vimproc#system_bg(substitute(l:command, '%%TEXT%%', a:text, ''))
     endif
   else
     echo 'No default speech command found. Please define the user command.'
