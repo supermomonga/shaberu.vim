@@ -36,7 +36,7 @@ function! shaberu#command()
     let l:os = shaberu#os()
     if l:os == 'win'
       " TODO: sapi.dllのライセンスがよくわからないのでvbsでごまかしてる
-      return 'cscript ' + g:shaberu_path_sapi + ' '
+      return 'cscript ' . g:shaberu_path_sapi . ' '
     elseif l:os == 'mac'
       " TODO: sayは標準コマンドだけど日本語ボイスが標準かどうか微妙
       return 'say '
