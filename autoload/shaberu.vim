@@ -2,18 +2,48 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
+" OSの判定
+function! shaberu#os()
+  if exists('g:shaberu_user_os')
+    " 既に判定済みの場合は再計算しない
+    return g:shaberu_user_os
+  else
+    if has('win16') || has('win32') || has('win64')
+      let g:shaberu_user_os = 'win'
+    elseif has('win32unix')
+      let g:shaberu_user_os = 'win'
+    elseif (has('mac') || has('macunix') || has('gui_macvim') ||
+          \ (!executable('xdg-open') &&
+          \ system('uname') =~? '^darwin'))
+      let g:shaberu_user_os = 'mac'
+    elseif system('uname') =~? '^Linux'
+      let g:shaberu_user_os = 'linux'
+    elseif has('unix')
+      let g:shaberu_user_os = 'unix'
+    else
+      let g:shaberu_user_os = 'unknown'
+    endif
+    return g:shaberu_user_os
+  endif
+endfunction
+
+
 " Return speech synthesis command string
 function! shaberu#command()
   if exists('g:shaberu_user_define_say_command')
     return g:shaberu_user_define_say_command
   else
-    if has('mac')
+    let l:os = shaberu#os()
+    if l:os == 'win'
+      " TODO: sapi.dllのライセンスがよくわからないのでvbsでごまかしてる
+      return 'cscript ' + g:shaberu_path_sapi + ' '
+    elseif l:os == 'mac'
       " TODO: sayは標準コマンドだけど日本語ボイスが標準かどうか微妙
       return 'say '
-    elseif has('unix')
+    elseif l:os == 'unix'
       " TODO: unixに標準ライブラリあるのかな…
-    elseif has('win32') || has('win64')
-      " TODO: WindowsにはSAPIというMS標準ライブラリがあるらしいがよくわかってない
+    elseif l:os == 'linux'
+      " TODO: linuxに標準ライブラリあるのかな…
     endif
   endif
   return 0

@@ -21,6 +21,7 @@ command! ShaberuMuteToggle call shaberu#mute_toggle()
 " Default settings
 let g:shaberu_is_mute = 0
 let g:shaberu_echo_when_mute = 1
+let g:shaberu_path_sapi = substitute(expand('<sfile>'), '\.vim', '_sapi.vbs', '')
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
