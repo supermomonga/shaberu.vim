@@ -1,0 +1,38 @@
+# Shaberu.vim
+
+Shaberu.vim is the wrapper of speech synethis.
+You can make your vim speak easily with Shaberu.vim.
+
+# Install
+
+Put following lines into your .vimrc.
+
+    NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/vimproc'
+    NeoBundle 'supermomonga/shaberu.vim'
+
+Then, execute _:Unite neobundle/update_
+
+# Configuration
+
+If you use Mac OS X or Windows, you don't need to do anything.
+If you use other OS like Linux, you need to set _g:shaberu_user_define_say_command_.
+
+    let g:shaberu_user_define_say_command = 'saycommand "%%TEXT%%"'
+
+Shaberu convert _%%TEXT%%_ to the text to speak.
+
+## Example
+
+    " Speak Japanese voice on OS X
+    let g:shaberu_user_define_say_command = 'say -v Kyoko "%%TEXT%%"'
+
+# Usage
+
+Simplly, execute _:ShaberuSay_ command to speak text.
+
+    :ShaberuSay Hi! I'm vim!
+
+## More futures
+Shaberu.vim has more futures, like Mute toggle, outputter for QuickRun.vim , and others.
+See _:h shaberu_.
