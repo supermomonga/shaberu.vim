@@ -17,11 +17,12 @@ let g:shaberu_echo_when_mute = get(g:, 'shaberu_echo_when_mute', 1)
 let g:shaberu_path_sapi      = substitute(substitute(expand('<sfile>'), '\.vim$', '_sapi.vbs', ''), '\\', '/', 'g')
 
 " Define commands
-command! -nargs=1 ShaberuSay call shaberu#say(<q-args>)
-command! ShaberuSayRecursive call shaberu#say_interactive_recursive()
-command! ShaberuMuteOn       call shaberu#mute(1)
-command! ShaberuMuteOff      call shaberu#mute(0)
-command! ShaberuMuteToggle   call shaberu#mute_toggle()
+command! -nargs=1 ShaberuSay    call shaberu#say(<q-args>)
+command! ShaberuSayInteractive  call shaberu#say_interactive()
+command! ShaberuSayRecursive    call shaberu#say_interactive_recursive()
+command! ShaberuMuteOn          call shaberu#mute(1)
+command! ShaberuMuteOff         call shaberu#mute(0)
+command! ShaberuMuteToggle      call shaberu#mute_toggle()
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
