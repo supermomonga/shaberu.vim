@@ -65,6 +65,28 @@ function! shaberu#say(text)
   endif
 endfunction
 
+
+" Speech text interactive
+function! shaberu#say_interactive()
+  let l:text = input("Text to speech: ")
+  if l:text == ""
+    return 0
+  else
+    call shaberu#say(l:text)
+    return 1
+  end
+endfunction
+
+
+" Speech and then prepare to exec :ShaberuSay command again.
+function! shaberu#say_interactive_recursive()
+  let l:result = 1
+  while l:result
+    let l:result = shaberu#say_interactive()
+  endwhile
+endfunction
+
+
 " Speech and do something 
 function! shaberu#order(text, order)
   call shaberu#say(a:text)
