@@ -12,6 +12,20 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 " Default settings
+let g:shaberu_dicts          = get(g:, 'shaberu_dicts', {})
+let g:shaberu_dicts.default  = get(g:shaberu_dicts, 'default', [
+      \   ['https\?:\/\/.\+', 'URL'],
+      \   ['vim\s*script', 'ビムスクリプト'],
+      \   ['vim', 'ビム'],
+      \   ['emacs', 'イーマックス'],
+      \   ['ruby', 'ルビー'],
+      \   ['hi', 'ハイ'],
+      \   ['benri', '便利'],
+      \   ['benry', '便利'],
+      \   ['lingr', 'リングル'],
+      \   ['twitter', 'ツイッター'],
+      \   ['twitter', 'ツイッター'],
+      \ ])
 let g:shaberu_is_mute        = get(g:, 'shaberu_is_mute', 0)
 let g:shaberu_echo_when_mute = get(g:, 'shaberu_echo_when_mute', 1)
 let g:shaberu_path_sapi      = substitute(substitute(expand('<sfile>'), '\.vim$', '_sapi.vbs', ''), '\\', '/', 'g')

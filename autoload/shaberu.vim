@@ -51,19 +51,34 @@ endfunction
 
 " Just speech
 function! shaberu#say(text)
+  let text = shaberu#filter(a:text)
   let l:command = shaberu#command()
-  if l:command != '' 
+  if l:command != ''
     if g:shaberu_is_mute
       if g:shaberu_echo_when_mute
-        echo 'Mute : ' . a:text 
+        echo 'Mute : ' . text
       endif
     else
-      call vimproc#system_bg(substitute(l:command, '%%TEXT%%', a:text, ''))
+      call vimproc#system_bg(substitute(l:command, '%%TEXT%%', text, ''))
     endif
   else
     echo 'No default speech command found. Please define the user command.'
   endif
 endfunction
+
+
+" Filter with dicts
+function! shaberu#filter(text)
+  let text = a:text
+  for key in keys(g:shaberu_dicts)
+    let dict = g:shaberu_dicts[key]
+    for filter in dict
+      let text = substitute(text, '\c' . filter[0], filter[1], 'g')
+    endfor
+  endfor
+  return text
+endfunction
+
 
 
 " Speech text interactive
