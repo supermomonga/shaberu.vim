@@ -59,7 +59,19 @@ function! shaberu#say(text)
         echo 'Mute : ' . text
       endif
     else
-      call vimproc#system_bg(substitute(l:command, '%%TEXT%%', text, ''))
+      if g:shaberu_use_voicetext_api
+        " Use VoiceText API
+        call vimproc#system_bg(
+              \   'curl "https://api.voicetext.jp/v1/tts" -s '
+              \   . ' -u "' . g:shaberu_voicetext_apikey . ':"'
+              \   . ' -d "text=' . text . '"'
+              \   . ' -d "speaker=' . g:shaberu_voicetext_speaker . '"'
+              \   . ' | ' . g:shaberu_voicetext_play_command
+              \ )
+      else
+        " Normal
+        call vimproc#system_bg(substitute(l:command, '%%TEXT%%', text, ''))
+      endif
     endif
   else
     echo 'No default speech command found. Please define the user command.'
